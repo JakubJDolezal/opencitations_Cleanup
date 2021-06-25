@@ -81,16 +81,16 @@ def main():
     write('AllCitations.parq', old_dataframe)
 
 
-    unique = np.array([], dtype=object)
+    unique_dois = np.array([], dtype=object)
     for i in range(0, len(names)):
         dataframe = pd.read_csv(names[i], sep=',', dtype=str, low_memory=False)
-        unique = np.concatenate((unique, dataframe['citing'].unique(), dataframe['cited'].unique()), axis=None)
-        unique = np.unique(unique)
+        unique_dois = np.concatenate((unique_dois, dataframe['citing'].unique(), dataframe['cited'].unique()), axis=None)
+        unique_dois = np.unique(unique_dois)
         del dataframe
         gc.collect()
-    hs = np.empty(len(unique))
+    hs = np.empty(len(unique_dois))
     for j in range(0, len(hs)):
-        hs[j] = hash(unique[j])
+        hs[j] = hash(unique_dois[j])
 
     d = {'doi': unique, 'hash': hs}
     dfg = pd.DataFrame(data=d)
