@@ -16,8 +16,8 @@ import sys
   baiscally non-existent
  '''
 
-def main():
 
+def main():
     names = []
     for i in range(1, 64):
         names.append('Data/2019-10-21T22:41:20_' + str(i) + '.csv')
@@ -76,15 +76,15 @@ def main():
 
     old_dataframe = pd.read_parquet('Name0.parq', engine='fastparquet')
     for i in range(1, split):
-        dataframe = pd.read_parquet('Name'+str(i)+'.parq', engine='fastparquet')
+        dataframe = pd.read_parquet('Name' + str(i) + '.parq', engine='fastparquet')
         old_dataframe = pd.concat([old_dataframe, dataframe])
     write('AllCitations.parq', old_dataframe)
-
 
     unique_dois = np.array([], dtype=object)
     for i in range(0, len(names)):
         dataframe = pd.read_csv(names[i], sep=',', dtype=str, low_memory=False)
-        unique_dois = np.concatenate((unique_dois, dataframe['citing'].unique(), dataframe['cited'].unique()), axis=None)
+        unique_dois = np.concatenate((unique_dois, dataframe['citing'].unique(), dataframe['cited'].unique()),
+                                     axis=None)
         unique_dois = np.unique(unique_dois)
         del dataframe
         gc.collect()
