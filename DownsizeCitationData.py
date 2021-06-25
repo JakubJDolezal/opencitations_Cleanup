@@ -32,7 +32,7 @@ def main():
     for i in range(1, 4):
         names.append('Data/2020-11-22T17:48:01_' + str(i) + '.csv')
     if sys.argv[1]:
-        split = sys.argv[1]
+        split = int(sys.argv[1])
     else:
         split = 4
     for s in range(0, split):
